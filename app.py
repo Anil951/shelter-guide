@@ -27,19 +27,19 @@ def main():
     button_value = request.form['button']
     if button_value == 'hyderabad':
         subtitle="Hyderabad"
-        model=joblib.load('models\hyderabad-pred.joblib')
+        model=joblib.load('models/hyderabad-pred.joblib')
         df=pd.read_csv('models/FINAL_hyd.csv')
         rmodel=joblib.load('models/FINAL_hyderabad_rent.joblib')
         rdf=pd.read_csv('models/final_Hyderabad_rent.csv')
     elif button_value == 'chennai':
         subtitle="Chennai"
-        model=joblib.load('models\chennai-pred.joblib')
+        model=joblib.load('models/chennai-pred.joblib')
         df=pd.read_csv('models/FINAL_che.csv')
         rmodel=joblib.load('models/FINAL_chennai_rent.joblib')
         rdf=pd.read_csv('models/final_Chennai_rent.csv')
     elif button_value == 'kolkata':
         subtitle="Kolkata"
-        model=joblib.load('models\kolkata-pred.joblib')
+        model=joblib.load('models/kolkata-pred.joblib')
         df=pd.read_csv('models/FINAL_kol.csv')
         rmodel=joblib.load('models/FINAL_kolkata_rent.joblib')
         rdf=pd.read_csv('models/final_Kolkata_rent.csv')
@@ -51,13 +51,13 @@ def main():
         rdf=pd.read_csv('models/final_Bangalore_rent.csv')
     elif button_value == 'mumbai':
         subtitle="Mumbai"
-        model=joblib.load('models\mumbai-pred.joblib')
+        model=joblib.load('models/mumbai-pred.joblib')
         df=pd.read_csv('models/FINAL_mum.csv')
         rmodel=joblib.load('models/FINAL_mumbai_rent.joblib')
         rdf=pd.read_csv('models/final_Mumbai_rent.csv')
     elif button_value == 'delhi':
         subtitle="Delhi"
-        model=joblib.load('models\delhi-pred.joblib')
+        model=joblib.load('models/delhi-pred.joblib')
         df=pd.read_csv('models/FINAL_del.csv')
         rmodel=joblib.load('models/FINAL_delhi_rent.joblib')
         rdf=pd.read_csv('models/final_Delhi_rent.csv')
