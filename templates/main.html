@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shelter-Guide</title>
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+                           
+        <!-- Fontawesome CDN Link -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
+
+
+</head>
+<body>
+  
+  <h2>shelter guide</h2>
+      <h2 id="city">
+        {{sub_title}}
+      </h2>
+   <a id="choosecity" href="http://127.0.0.1:5000"><img src="/static/images/location.png" style="position:relative;top:7px;">choose another city</a>
+    <br><br>
+  <div class="sidenav">
+    <a href="#modal">predict house price</a>
+    <a href="#modal2">get house by price range</a>
+    <a href="#model3">predict house rent</a>
+  </div>
+
+
+
+
+  <div class="modal" id="modal" >
+  
+    <div class="modal__container">
+      <div class="modal__featured">
+        <div class="modal__circle"></div>
+      </div>
+      <div class="modal__content">
+      
+  
+      
+
+        <form action="{{ url_for('predict') }}" method="post" id="form1">
+          <ul class="form-list">
+            <div id="first2">
+              <li class="form-list__row">
+                <label>AREA (in sqft)</label>
+                <input type="number" name="area" required="" step="1" />
+              </li>
+              <li class="form-list__row">
+                <label>BEDROOMS</label>
+                <input type="number" name="bed" required="" step="1"/>
+              </li>
+            </div>
+            
+            <div id="second2">
+              <li class="form-list__row">
+                <label>RESALE</label>
+                <div id="resaleradio">
+                  <label>
+                    <input type="radio" name="resale" value="1" >
+                    new
+                  </label>
+                  <label>
+                    <input type="radio" name="resale" value="0" >
+                    old
+                  </label>
+                </div>              
+              </li>
+  
+              <li class="form-list__row">
+                <label>VAASTHU</label>
+                <div id="resaleradio">
+                  <label>
+                    <input type="radio" name="vastu" value="1" >
+                    yes
+                  </label>
+                  <label>
+                    <input type="radio" name="vastu" value="0" >
+                    no
+                  </label>
+                </div>              
+              </li>
+  
+            </div>
+
+
+            <div id="third2">
+              <li class="form-list__row">
+                <label>NEAR BY RESOURCES</label>
+                <br>
+                <select name="nearby" id="nearby" multiple multiselect-search="true" multiselect-select-all="true" multiselect-max-items="3" required="">
+                  <option value="gym" name='nearby1'>Gymnasium</option>
+                  <option value="swim" name='nearby2'>SwimmingPool</option>
+                  <option value="land" name='nearby3'>LandscapedGardens</option>
+                  <option value="jog" name='nearby4'> JoggingTrack</option>
+                  <option value="indo" name='nearby5'>IndoorGames</option>
+                  <option value="mall" name='nearby6'>ShoppingMall</option>
+                  <option value="sport" name='nearby7'>SportsFacility</option>
+                  <option value="1atm" name='nearby8'>ATM</option>
+                  <option value="club" name='nearby9'>ClubHouse</option>
+                  <option value="school" name='nearby10'>School</option>
+                  <option value="cafe" name='nearby11'>Cafeteria</option>
+                  <option value="hosp" name='nearby12'>Hospital</option>  
+                  <option value="child" name='nearby13'>Childrensplayarea</option>
+                </select>
+              </li>
+              
+              <li class="form-list__row">
+                <label>ESSENTIALS</label>
+                <br>
+                <select name="ess" multiple multiselect-search="true" multiselect-select-all="true" multiselect-max-items="3" required="">
+                  <option value="pow" name="ess1">PowerBackup</option>
+                  <option value="car" name="ess2">CarParking</option>
+                  <option value="lift" name="ess3">LiftAvailable</option>
+                  <option value="sec" name="ess4">24X7Security</option>
+                  <option value="gas" name="ess5">Gasconnection</option>
+  
+                </select>
+              </li>
+            </div>
+
+            <br>
+            
+        
+              <li class="form-list__row">
+                <label>LOCATION</label>
+                <input type="text" name="location" required="" />
+              </li>
+              
+            
+            <li>
+              <button type="submit" class="button" id="predict" name="predict" value="predict">PREDICT</button>
+            </li>
+
+            <h4 id="ans">
+              {{prediction_text}}
+            </h4>
+          </ul>
+        </form>
+
+
+      </div> <!-- END: .modal__content -->
+    </div> <!-- END: .modal__container -->
+  </div> <!-- END: .modal -->
+
+  <br><br><br><br>
+
+  <div class="container" id="modal2">
+    <div class="left">
+     
+      <form action="{{ url_for('predict') }}" method="post" id="form2">
+        <input type="checkbox" id="lol-checkbox" name="rentorown" value="1">
+        <label id="button" for="lol-checkbox">
+          <div id="knob"></div>
+          <div id="subscribe">RENT</div>
+          <div id="alright">OWN</div>
+        </label>
+        <label>FROM <span id="help">i<div class="helpinside"></div></span></label>
+        <input type="number" name="from" required >
+        <label>TO <span id="help">i<div class="helpinside"></div></span></label>
+        <input type="number" name="to" required >
+        <button type="submit" name="show" value="show" id="show" >Show</button>
+      </form>
+      
+    </div>
+    <div class="right">
+      <div >{{ my_map|safe }}</div>
+      <h4 style="  font: .8em verdana;color:red">
+         <b> {{map_message}}</b>
+      </h4>
+      
+       <div id="locationsinpricerange"><b>Locations at Price range -- {{fromm}} <div class="value"></div> to {{to}} <div class="value"></div>:</b><br>{% for location in locations %}&nbsp &nbsp&nbsp&nbsp{{ location|safe }}<br>{% endfor %}</div>
+      
+
+    </div>
+  </div>
+
+  <div id="model3">
+    
+    <div class="modal__container" >
+
+      <div class="modal__content">
+      
+  
+      
+
+        <form action="{{ url_for('predict') }}" method="post" id="form1">
+          <ul class="form-list">
+            <div id="first2">
+              <li class="form-list__row">
+                <label>AREA (in sqft)</label>
+                <input type="number" name="rarea" required="" step="1" />
+              </li>
+              <li class="form-list__row">
+                <label>BEDROOMS</label>
+                <input type="number" name="rbed" required="" step="1"/>
+              </li>
+              <li class="form-list__row">
+                <label>BATHROOMS</label>
+                <input type="number" name="rbath" required="" step="1"/>
+              </li>
+            </div>
+            
+            <div id="second2">
+              <li class="form-list__row">
+                <label>SELLER TYPE</label>
+                <div id="sellertyperadio">
+                  <label>
+                    <input type="radio" name="sellertype" value="0" >
+                    owner
+                  </label>
+                  <label>
+                    <input type="radio" name="sellertype" value="1" >
+                    agent
+                  </label>
+                  <label>
+                    <input type="radio" name="sellertype" value="2" >
+                    builder
+                  </label>
+                </div>              
+              </li>
+  
+              <li class="form-list__row">
+                <label>LAYOUT TYPE</label>
+                <div id="sellertyperadio">
+                  <label>
+                    <input type="radio" name="layouttype" value="0" >
+                    BHK
+                  </label>
+                  <label>
+                    <input type="radio" name="layouttype" value="1" >
+                    RK
+                  </label>
+                </div>              
+              </li>
+
+              
+  
+            </div>
+
+
+            <div id="third2">
+              <li class="form-list__row">
+                <label>PROPERTY TYPE</label>
+                <br>
+                <select name="propertytype" id="propertytype" required="">
+                  <option value="" disabled selected style="display:none">Select </option>
+                  <option value="0" name="propertytype">Apartment</option>
+                  <option value="1" name="propertytype">Studio Apartment</option>
+                  <option value="2" name="propertytype">Independent House</option>
+                  <option value="3" name="propertytype"> Independent Floor</option>
+                  <option value="4" name="propertytype">Villa</option>
+                  <option value="5" name="propertytype">Penthouse</option>
+                </select>
+              </li>
+              
+              <li class="form-list__row">
+                <label>FURNISH TYPE</label>
+                <br>
+                <select name="furnishtype" id="propertytype" required="">
+                  <option value="" disabled selected style="display:none;">Select</option>
+                  <option value="0" name='furnishtype'>Furnished</option>
+                  <option value="1" name='furnishtype'>semi-Furnished</option>
+                  <option value="2" name='furnishtype'>Un-Furnished</option>
+                </select>
+              </li>
+            </div>
+
+            <br>
+            
+        
+              <li class="form-list__row">
+                <label>LOCATION</label>
+                <input type="text" name="location" required="" />
+              </li>
+              
+            
+            <li>
+              <button type="submit" class="button" id="rpredict" name="rpredict" value="rpredict">PREDICT</button>
+            </li>
+
+            <h4 id="ans">
+              {{rprediction_text}}
+            </h4>
+          </ul>
+        </form>
+
+
+      </div> 
+      <div class="modal__featured">
+        <div class="modal__circle"></div>
+    </div>
+  </div>
+  
+
+
+
+<script src="{{ url_for('static', filename='main.js') }}"></script>
+</body>
+</html>
+

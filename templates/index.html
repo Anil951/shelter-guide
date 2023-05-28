@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Shelter-Guide</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+  <style>
+    
+  </style>
+</head>
+<body>
+  <!-- Logo element with a source and alt attribute -->
+
+    <div class="spinner" id="logo"  alt="Logo">
+        <div class="loading" id='loading'>
+            <h2>shelter guide</h2>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+    </div>
+
+
+  <!-- Script to hide the logo and show the website after 2 seconds -->
+  <script>
+    setTimeout(function() {
+      document.getElementById("logo").style.display = "none";
+      document.getElementById("website").style.display = "block";
+    }, 1000);
+  </script>
+
+  <!-- Website contents to load after 2 seconds -->
+  <div id="website">
+    <h2 id="afterloadtitle">shelter guide</h2>
+
+
+    <div id="maintitle">CHOOSE A CITY</div>
+    <form action="{{ url_for('main') }}" method="post">
+      <div class="container" >
+          
+          <button onclick="location.href='/main'" class="box" value='hyderabad' name='button'>
+            <img src="/static/images/charminar.png" alt="Image 1" >
+            <div class="title" style='position:relative;top:-1px;left:5px;'>Hyderabad</div>
+          </button>
+          <button onclick="location.href='/main'" class="box" value='chennai' name='button'>
+            <img src="/static/images/temple.png" alt="Image 2" style='opacity: 0.85;'>
+            <div class="title" >&nbsp&nbspChennai</div>
+          </button>
+          <button class="box" onclick="location.href='/main'" value='kolkata' name='button'>
+            <img src="/static/images/victoria-memorial.png" alt="Image 3" >
+            <div class="title" style='position:relative;top:0px;'>&nbsp&nbsp   Kolkata</div>
+          </button>
+          <button class="box" onclick="location.href='/main'" value='bangalore' name='button'>
+            <img src="/static/images/vidhana-soudha (1).png" alt="Image 4" >
+            <div class="title" > &nbspBangalore</div>
+          </button>
+          <button class="box" onclick="location.href='/main'" value='mumbai' name='button'>
+            <img src="/static/images/gateway-of-india.png" alt="Image 5">
+            <div class="title"> &nbsp&nbsp Mumbai</div>
+          </button>
+          <button class="box" onclick="location.href='/main'" value='delhi' name='button'>
+            <img src="/static/images/lotus-temple.png" alt="Image 6">
+            <div class="title">&nbsp&nbsp&nbsp&nbsp   Delhi</div>
+          </button>
+      </div>
+    </form>
+  </div>
+
+  
+</body>
+</html>
