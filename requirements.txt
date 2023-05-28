@@ -105,9 +105,6 @@ PySocks==1.7.1
 python-dateutil==2.8.2
 pyttsx3==2.90
 pytz==2022.1
-pywin32==306
-pywin32-ctypes==0.2.0
-pywinpty==2.0.10
 pyzmq==25.0.2
 qtconsole==5.4.2
 QtPy==2.3.1
